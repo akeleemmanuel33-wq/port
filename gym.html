@@ -1,0 +1,619 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Crossfit Facility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ef4444;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #ef4444;
+        }
+
+        .menu-btn {
+            display: block;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+            z-index: 60;
+            position: relative;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.98);
+            z-index: 55;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: #ef4444;
+        }
+
+        .mobile-menu-icons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 5rem 1.5rem 2rem;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 2px white;
+            text-stroke: 2px white;
+        }
+
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            max-width: 56rem;
+        }
+
+        .hashtag {
+            border: 1px solid #4b5563;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            color: #d1d5db;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .hashtag:hover {
+            border-color: #ef4444;
+        }
+
+        /* Scroll Button */
+        .scroll-btn-container {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            text-align: center;
+        }
+
+        .scroll-btn {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: #ef4444;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .scroll-btn:hover {
+            background-color: #dc2626;
+        }
+
+        .scroll-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #fff;
+        }
+
+        .scroll-text {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: #18181b;
+            padding: 3rem 1.5rem;
+        }
+
+        .services-container {
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .services-subtitle {
+            color: #ef4444;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .services-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            padding: 0 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-icon-wrapper {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            border: 2px solid #ef4444;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background-color: #ef4444;
+        }
+
+        .service-icon svg {
+            width: 2rem;
+            height: 2rem;
+            stroke: #ef4444;
+            transition: stroke 0.3s;
+        }
+
+        .service-card:hover .service-icon svg {
+            stroke: #fff;
+        }
+
+        .service-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-description {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 640px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            h1 {
+                font-size: 3.75rem;
+            }
+
+            .hashtags {
+                gap: 0.75rem;
+                margin-top: 3rem;
+            }
+
+            .scroll-btn-container {
+                bottom: 2rem;
+                right: 2rem;
+            }
+
+            .scroll-btn {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .scroll-btn svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            .scroll-text {
+                display: block;
+            }
+
+            .services {
+                padding: 4rem 2rem;
+            }
+
+            .services-header {
+                margin-bottom: 4rem;
+            }
+
+            .services-title {
+                font-size: 2.25rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .service-icon-wrapper {
+                margin-bottom: 1.5rem;
+            }
+
+            .service-icon {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .service-icon svg {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .service-title {
+                font-size: 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-content {
+                padding: 5rem 4rem 2rem;
+            }
+
+            h1 {
+                font-size: 4.5rem;
+            }
+
+            .services-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 5rem 6rem 2rem;
+            }
+
+            h1 {
+                font-size: 6rem;
+            }
+
+            .services {
+                padding: 5rem 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .outline-text {
+                -webkit-text-stroke: 1.5px white;
+                text-stroke: 1.5px white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">GYM</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Pages</a>
+            <a href="#">Blog</a>
+            <a href="#">Shop</a>
+            <a href="#">Contacts</a>
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        </div>
+        <button class="menu-btn" onclick="toggleMenu()">
+            <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#" onclick="toggleMenu()">Home</a>
+        <a href="#" onclick="toggleMenu()">Pages</a>
+        <a href="#" onclick="toggleMenu()">Blog</a>
+        <a href="#" onclick="toggleMenu()">Shop</a>
+        <a href="#" onclick="toggleMenu()">Contacts</a>
+        <div class="mobile-menu-icons">
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>
+                Ultimate<br>
+                Crossfit<br>
+                <span class="outline-text">Facility</span>
+            </h1>
+            
+            <div class="hashtags">
+                <span class="hashtag">#sportwear</span>
+                <span class="hashtag">#pumping</span>
+                <span class="hashtag">#pool</span>
+                <span class="hashtag">#swimming</span>
+                <span class="hashtag">#bodybuilding</span>
+                <span class="hashtag">#gym</span>
+                <span class="hashtag">#personal</span>
+                <span class="hashtag">#health</span>
+                <span class="hashtag">#training</span>
+                <span class="hashtag">#coach</span>
+                <span class="hashtag">#crossfit</span>
+                <span class="hashtag">#sport</span>
+                <span class="hashtag">#workout</span>
+                <span class="hashtag">#fitness</span>
+                <span class="hashtag">#trainer</span>
+                <span class="hashtag">#program</span>
+                <span class="hashtag">#sportswear</span>
+            </div>
+        </div>
+
+        <div class="scroll-btn-container">
+            <button class="scroll-btn" onclick="scrollToServices()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </button>
+            <div class="scroll-text">SCROLL<br>DOWN</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services" id="services">
+        <div class="services-container">
+            <div class="services-header">
+                <p class="services-subtitle">WHAT WE OFFER</p>
+                <h2 class="services-title">
+                    Achieve amazing results<br>
+                    with our services
+                </h2>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M14.4 14.4 9.6 9.6"></path>
+                                <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"></path>
+                                <path d="m21.5 21.5-1.4-1.4"></path>
+                                <path d="M3.9 3.9 2.5 2.5"></path>
+                                <path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="service-title">Best equipment</h3>
+                    <p class="service-description">Consectetur adipiscing elit, sed do eiusmod tempo.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="service-title">Training plan</h3>
+                    <p class="service-description">Consectetur adipiscing elit, sed do eiusmod tempo.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"></path>
+                                <path d="M18 5a2.5 2.5 0 0 0-2.5-2.5c-1.19 0-1.98.69-2.5 1.5-.52-.81-1.31-1.5-2.5-1.5A2.5 2.5 0 0 0 8 5"></path>
+                                <path d="M12 17c5 0 8.27-2.51 9-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="service-title">Nutrition plan</h3>
+                    <p class="service-description">Consectetur adipiscing elit, sed do eiusmod tempo.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                                <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="service-title">Swimming pool</h3>
+                    <p class="service-description">Consectetur adipiscing elit, sed do eiusmod tempo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            
+            mobileMenu.classList.toggle('active');
+            
+            // Toggle between hamburger and X icon
+            if (mobileMenu.classList.contains('active')) {
+                menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+            } else {
+                menuIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            }
+        }
+
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+    </script>
+</body>
+</html>

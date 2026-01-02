@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eee's - The Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: 500ms;
+        }
+        .header.hide {
+            /* transform: translateY(-100%);
+            pointer-events: none; */
+            top: -100% !important;
+        }
+
+        .top-bar {
+            background:coral;
+            color: white;
+            padding: 5px 0;
+            font-size: 8px;
+            text-align: center;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            animation: popIn 2s ease-in forwards;
+    }
+       
+       @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: bold;
+            color: darkblue;
+            text-decoration: none;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+            border-radius: 10px;
+            overflow: clip;
+            border: 1px solid darkblue;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 50px 12px 15px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 45px;
+            background: darkblue;
+            border: none;
+            color: white;
+            cursor: pointer;
+            /* border-radius: 0 5px 5px 0; */
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .cart-count {
+            background: darkblue;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background: darkblue;
+            padding: 10px 0;
+        }
+
+        .nav-menu {
+            width:100vw;
+            height:1%;
+            max-width: 1200px;
+            margin: 0 auto;
+           display:flex;
+            justify-content: space-evenly;
+            list-style: none;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            margin-right: 2px;
+        }
+
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-size:5px 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-item a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1rem;
+        }
+
+        .categories-sidebar {
+            background: white;
+            border-radius: 5px;
+            padding: 1rem;
+            height: fit-content;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .categories-title {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color:darkblue;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-list a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .category-list a:hover {
+            color:darkblue;
+        }
+
+        .main-banner {
+            background: linear-gradient(135deg,darkblue,coral);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            animation: popn 1s ease-in forwards;
+            text-align: center;
+        }
+        
+ .logo1{
+          width:50px;
+          height:auto;
+          border-radius:50px;
+          animation: popn 7s ease-in forwards;
+        }
+
+        
+        @keyframes popn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translate X(-100px);
+      }
+      
+      100% {
+        opacity: 1;
+        transform: scale(1) translate X(0px);
+      }
+    }
+
+
+        .banner-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .banner-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: white;
+            color: darkblue;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.4s;
+        }
+
+
+        .cta-button1 {
+            background: white;
+            color: darkblue;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.4s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-button1:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Featured Products */
+        .featured-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .product-title {
+            font-size: 14px;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color:darkblue;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-old-price {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .stars {
+            color:cyan;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background-color:darkblue;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color:coral;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color:grey;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding: 1rem;
+            text-align: center;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .search-container {
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .hero-banner {
+                grid-template-columns: 1fr;
+                margin: 1rem auto;
+            }
+
+            .categories-sidebar {
+                order: 2;
+            }
+
+            .banner-title {
+                font-size: 2rem;
+            }
+            a{
+              text-decoration:none;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                margin-right: 1rem;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header hide">
+        <div class="top-bar">
+            <marquee behavior="" direction="">🎉 Free delivery on orders above ₦15,000 | Download the EE's unique App</marquee>
+        </div>
+        
+        <div class="nav-container">
+            
+            <img href="jumia.html" src="logo.png" class="logo1">
+            
+            <a href="#" class="logo">Eee's Unique Enterprise </a>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search products, brands and categories">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="nav-icons">
+                <a href="#" class="nav-icon">👤 Account</a>
+                <a href="ai.html" class="nav-icon">❤️ Help</a>
+                <a href="#" class="nav-icon">🛒 Cart <span class="cart-count">3</span></a>
+            </div>
+        </div>
+        
+
+    </header>
+            <!--<nav class="main-nav">
+                   
+            <div class="nav-menu">
+                <li class="nav-item"><a href="#">Supermarket</a>
+                <a href="#">Health & Beauty</a>
+                <li class="nav-item"><a href="#">Home & Office</a></li>
+                <li class="nav-item"><a href="#">Appliances</a></li>
+                <li class="nav-item"><a href="#">Phones & Tablets</a></li>
+                <li class="nav-item"><a href="#">Computing</a></li>
+                <li class="nav-item"><a href="#">Electronics</a></li>
+                <li class="nav-item"><a href="#">Fashion</a></li>
+                <li class="nav-item"><a href="#">Baby Products</a></li>
+                <li class="nav-item"><a href="#">Gaming</a></li>
+                <li class="nav-item"><a href="#">Sporting Goods</a></li>
+            </div>
+                        
+        </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-banner">
+        <aside class="categories-sidebar">
+            <div class="categories-title">Categories</div>
+            <ul class="category-list">
+                <li><a href="Phones.html">📱 Phones & Tablets</a></li>
+                <li><a href="#">💻 Computing</a></li>
+                <li><a href="#">📺 Electronics</a></li>
+                <li><a href="#">👗 Fashion</a></li>
+                <li><a href="#">🏠 Home & Office</a></li>
+                <li><a href="#">💄 Health & Beauty</a></li>
+                <li><a href="#">🍕 Supermarket</a></li>
+                <li><a href="#">👶 Baby Products</a></li>
+                <li><a href="#">🎮 Gaming</a></li>
+                <li><a href="#">⚽ Sporting Goods</a></li>
+            </ul>
+        </aside>
+        
+        <div class="main-banner">
+            <h1 class="banner-title">Welcome to Eee's Unique Marketplace</h1>
+            <p class="banner-subtitle">Nigeria's #1 Online Mall</p>
+            <a href="jumia.html" class="cta-button">Shop Now</a>
+            
+            <button class="cta-button1">Get App</button>
+            
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-section">
+        <h2 class="section-title">🔥 Flash Sales</h2>
+        <div class="products-grid">
+            <div class="product-card">
+              <img style="object-fit:contain" class="product-image" src="iphone.jpg">
+               
+                <div class="product-title">iPhone 14 Pro Max 128GB</div>
+                <div class="product-price">
+                    ₦850,000
+                    <span class="product-old-price">₦950,000</span>
+                </div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(245 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                 <img style="object-fit:fill" class="product-image" src="1.jpg">
+                <div class="product-title">HP Pavilion 15 Intel Core i5</div>
+                <div class="product-price">
+                    ₦1,420,000
+                    <span class="product-old-price">₦1,480,000</span>
+                </div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(89 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                  <img style="object-fit:fill" class="product-image" src="2.jpg">
+                <div class="product-title">Nike Air Force 1 Low White</div>
+                <div class="product-price">
+                    ₦45,000
+                    <span class="product-old-price">₦55,000</span>
+                </div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(156 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+  <img style="object-fit:fill" class="product-image" src="3.jpg">
+                <div class="product-title">Sony WH-1000XM4 Wireless</div>
+                <div class="product-price">
+                    ₦180,000
+                    <span class="product-old-price">₦220,000</span>
+                </div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(67 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories-grid">
+            <div href="Phones.html" class="category-card">
+                <div class="category-icon">📱</div>
+                <h3>Phones & Tablets</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">👗</div>
+                <h3>Fashion</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📺</div>
+                <h3>Electronics</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🏠</div>
+                <h3>Home & Office</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💄</div>
+                <h3>Beauty</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🍕</div>
+                <h3>Supermarket</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Products -->
+    <section class="featured-section">
+        <h2 class="section-title">📦 Recommended for You</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">📺 TV Image</div>
+                <div class="product-title">Samsung 55" 4K Smart TV</div>
+                <div class="product-price">₦380,000</div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(34 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">👜 Bag Image</div>
+                <div class="product-title">Designer Handbag Collection</div>
+                <div class="product-price">₦25,000</div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(78 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">⌚ Watch Image</div>
+                <div class="product-title">Apple Watch Series 8</div>
+                <div class="product-price">₦280,000</div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(123 reviews)</span>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🎒 Backpack Image</div>
+                <div class="product-title">Travel Laptop Backpack</div>
+                <div class="product-price">₦15,000</div>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(45 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">How to shop on Eee's Unique</a></li>
+                    <li><a href="#">Delivery options and timelines</a></li>
+                    <li><a href="#">How to return a product</a></li>
+                    <li><a href="#">Corporate and bulk purchases</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About Eee's Marketplace</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Eee's careers</a></li>
+                    <li><a href="#">Eee's Express</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">EE's Store Credit Terms</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Make Money with Eee's Unique Marketplace</h3>
+                <ul>
+                    <li><a href="#">Sell on Eee's Unique Marketplace</a></li>
+                    <li><a href="#">Vendor hub</a></li>
+                    <li><a href="#">Become a Sales Consultant</a></li>
+                    <li><a href="#">Become a Logistics Service Partner</a></li>
+                    <li><a href="#">Join the Eee's Unique KOL Program</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Eee's Unique International</h3>
+                <ul>
+                    <li><a href="#">Algeria</a></li>
+                    <li><a href="#">Egypt</a></li>
+                    <li><a href="#">Ghana</a></li>
+                    <li><a href="#">Ivory Coast</a></li>
+                    <li><a href="#">Kenya</a></li>
+                    <li><a href="#">Morocco</a></li>
+                    <li><a href="#">Senegal</a></li>
+                    <li><a href="#">Tunisia</a></li>
+                    <li><a href="#">Uganda</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Eee's Nigeria. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Header
+        const header = document.querySelector(".header")
+        // alert(header.classList)
+        if (header) {
+            window.addEventListener("scroll", ()=>{
+                if (window.scrollY > header.clientHeight) header.classList.add("hide")
+                else header.classList.remove("hide")
+            }) 
+        }
+
+
+        // Search functionality
+        const searchBox = document.querySelector('.search-box');
+        const searchBtn = document.querySelector('.search-btn');
+
+        searchBtn.addEventListener('click', () => {
+            const searchTerm = searchBox.value.trim();
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}`);
+                // Here you would typically redirect to search results
+            }
+        });
+
+        searchBox.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+
+        // Product card hover effects
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                alert('Product details would open here');
+            });
+        });
+
+        // Category card clicks
+        const categoryCards = document.querySelectorAll('.category-card');
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const categoryName = card.querySelector('h3').textContent;
+                alert(`Browsing ${categoryName} category`);
+            });
+        });
+
+        // Cart functionality simulation
+        const cartIcon = document.querySelector('.nav-icons a:last-child');
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Shopping cart would open here');
+        });
+
+        // CTA Button
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('click', () => {
+            alert('Welcome to Eees Marketplace! Start shopping now!');
+        });
+        
+const ctaButton1 = document.querySelector('.cta-button1');
+        ctaButton1.addEventListener('click', () => {
+            alert('Wait a minute, you would be redirected shortly  ');
+        });
+
+        // Mobile menu toggle (simplified)
+        let mobileMenuOpen = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add mobile menu functionality if needed
+            const navMenu = document.querySelector('.nav-menu');
+            
+            // Simple responsive behavior
+            function handleResize() {
+                if (window.innerWidth <= 768) {
+                    navMenu.style.display = mobileMenuOpen ? 'flex' : 'none';
+                } else {
+                    navMenu.style.display = 'flex';
+                }
+            }
+
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        });
+
+        // Simulate loading products
+        function loadMoreProducts() {
+            // This would typically fetch more products from an API
+            console.log('Loading more products...');
+        }
+
+        // Add some interactive features
+        document.querySelectorAll('.nav-item a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = link.textContent;
+                alert(`Browsing ${category} products`);
+            });
+        });
+    })
+    </script>
+</body>
+</html>

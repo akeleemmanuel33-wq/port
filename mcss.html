@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCSS Online - Student Result Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: #003366;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-shield {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-shield::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            z-index: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text .main {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .sub {
+            font-size: 11px;
+            opacity: 0.95;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: #005599;
+            border-radius: 4px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Slideshow Container */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideAnimation 1s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.7), rgba(0, 102, 204, 0.6));
+            z-index: 1;
+        }
+
+        @keyframes slideAnimation {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-content {
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .logo-container {
+                gap: 10px;
+            }
+
+            .logo-shield {
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-icon {
+                font-size: 24px;
+            }
+
+            .logo-text .main {
+                font-size: 20px;
+            }
+
+            .logo-text .sub {
+                font-size: 9px;
+            }
+
+        .slide-content h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease-out;
+            font-weight: bold;
+        }
+
+        .slide-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: backwards;
+            line-height: 1.6;
+        }
+
+        .slide-content .btn {
+            animation: fadeInUp 1s ease-out 0.4s;
+            animation-fill-mode: backwards;
+            font-size: 18px;
+            padding: 15px 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation Arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -30px;
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 35px;
+            transition: 0.3s ease;
+            border-radius: 0 5px 5px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.7);
+            padding: 20px 25px;
+        }
+
+        /* Dots */
+        .dots-container {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 16px;
+            width: 16px;
+            margin: 0 6px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background-color: rgba(255,255,255,0.9);
+            border-color: rgba(255,255,255,0.9);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background-color: rgba(255,255,255,0.8);
+            transform: scale(1.1);
+        }
+
+        /* Fade animation */
+        .fade {
+            animation-name: fadeEffect;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Portal Section */
+        .portal-section {
+            background: #f5f5f5;
+        }
+
+        .portal-title {
+            text-align: center;
+            font-size: 36px;
+            color: #003366;
+            margin-bottom: 50px;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .portal-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .portal-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .portal-card h3 {
+            color: #003366;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .portal-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: #fff;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #003366;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+        }
+
+        .content-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .content-box {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .content-box h4 {
+            color: #003366;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .content-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        /* Admission Section */
+        .admission-section {
+            background: #f5f5f5;
+        }
+
+        .admission-info {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .admission-info h4 {
+            color: #003366;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .admission-info p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box {
+            background: #e6f2ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0066cc;
+        }
+
+        /* Footer */
+        .footer {
+            background: #003366;
+            color: #fff;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            padding: 5px 0;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #005599;
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0066cc;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #005599;
+        }
+
+        .btn-secondary {
+            background: #28a745;
+        }
+
+        .btn-secondary:hover {
+            background: #218838;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            color: #003366;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+      
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #003366;
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .slideshow-container {
+                height: 450px;
+            }
+
+            .slide-content h1 {
+                font-size: 28px;
+            }
+
+            .slide-content p {
+                font-size: 16px;
+            }
+
+            .slide-content .btn {
+                font-size: 14px;
+                padding: 12px 25px;
+            }
+
+            .prev, .next {
+                padding: 12px;
+                font-size: 24px;
+            }
+
+            .portal-title {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .portal-grid,
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dot {
+                height: 12px;
+                width: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-container">
+                    <div class="logo-shield">
+                        <div class="logo-icon">🎓</div>
+                    </div>
+                    <div class="logo-text">
+                        <span class="main">MCSS Online</span>
+                        <span class="sub">Result Management System</span>
+                    </div>
+                </div>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portal">Portal</a></li>
+                <li><a href="#billing">Billing</a></li>
+                <li><a href="#admission">Admission</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#autopay">Autopay</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Slideshow Hero Section -->
+    <section class="slideshow-container">
+        <div class="slide fade active">
+            <img src="DSC_7107.JPG" alt="Students in University">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Student Result Management System</h1>
+                <p>A highly personalized portal-based solution that captures all school processes</p>
+                <button class="btn" onclick="openModal('student')">Access Portal</button>
+            </div>
+        </div>
+
+        <div class="slide fade">
+            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1920&h=600&fit=crop" alt="Online Payment">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Secure Online Payment</h1>
+                <p>Powered by Interswitch and Paystack for seamless transactions</p>
+                <button class="btn btn-secondary" onclick="openModal('payment')">Make Payment</button>
+            </div>
+        </div>
+
+        <div class="slide fade">
+            <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1920&h=600&fit=crop" alt="Students Studying">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Admission Portal</h1>
+                <p>Apply online for Common Entrance and Supplementary Examinations</p>
+                <button class="btn" onclick="openModal('admission')">Apply Now</button>
+            </div>
+        </div>
+
+        <div class="slide fade">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1920&h=600&fit=crop" alt="Students Reading">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Excellence in Education</h1>
+                <p>Empowering students with world-class digital learning tools</p>
+                <button class="btn" onclick="openModal('student')">Learn More</button>
+            </div>
+        </div>
+
+        <div class="slide fade">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1920&h=600&fit=crop" alt="School Campus">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h1>Modern School Management</h1>
+                <p>Comprehensive solutions for students, teachers, and administrators</p>
+                <button class="btn btn-secondary" onclick="openModal('admin')">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <a class="prev" onclick="changeSlide(-1)">❮</a>
+        <a class="next" onclick="changeSlide(1)">❯</a>
+
+        <!-- Dots -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </section>
+
+    <!-- Portal Section -->
+    <section class="portal-section" id="portal">
+        <div class="container">
+            <h2 class="portal-title">Result Portal</h2>
+            <div class="content-text">
+                <p>Provides a highly personalized portal-based solutions that captures the school processes and makes all operations (Students Finance, Admission and Records, Continues Assessment, Terminal Reports, etc) accessible and managed via the web, thus allowing us to effectively serve all stakeholders: students, parents, teachers, administrators, and etc.</p>
+                
+                <p>This solution is based on portal technology, which enables the greatest possible flexibility and personalization. It is an integrated solution that combines systems to serve a wide range of key audience and stakeholders of our dear College.</p>
+                
+                <p>In clearer terms, what a portal-based solution does, for example, is that by creating a password, a student, an administrator or a teacher will have a web platform where he or she can perform duties only applicable to his or her profile at any time. This means that school's administrators will have a wide access of the system and control all the various activities.</p>
+                
+                <p><strong>Please login to explore, using the result portal menu "Portal" in the homepage of this website with your username and password</strong></p>
+            </div>
+
+            <div class="portal-grid">
+                <div class="portal-card" onclick="openModal('student')">
+                    <div class="portal-icon">👨‍🎓</div>
+                    <h3>Student Portal</h3>
+                    <p>Access your results, continuous assessment, and terminal reports</p>
+                    <button class="btn" style="margin-top: 15px;">Login</button>
+                </div>
+
+                <div class="portal-card" onclick="openModal('teacher')">
+                    <div class="portal-icon">👨‍🏫</div>
+                    <h3>Teacher Portal</h3>
+                    <p>Manage student records and input assessment scores</p>
+                    <button class="btn" style="margin-top: 15px;">Login</button>
+                </div>
+
+                <div class="portal-card" onclick="openModal('admin')">
+                    <div class="portal-icon">👔</div>
+                    <h3>Administrator</h3>
+                    <p>Full system access and control for all operations</p>
+                    <button class="btn" style="margin-top: 15px;">Login</button>
+                </div>
+
+                <div class="portal-card" onclick="openModal('parent')">
+                    <div class="portal-icon">👪</div>
+                    <h3>Parent Portal</h3>
+                    <p>Monitor your child's academic progress and results</p>
+                    <button class="btn" style="margin-top: 15px;">Login</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Billing System Section -->
+    <section class="content-section" id="billing">
+        <div class="container">
+            <h2 class="section-title">Billing System</h2>
+            <div class="content-text">
+                <p>Above Billing System is the school initiative for digitalized mode of Payment and reporting. The System as powered by <strong>Interswitch Nigeria Limited</strong> and <strong>Paystack Payment Solutions</strong>, is designed for:</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-box">
+                    <h4>🎓 Students</h4>
+                    <ul>
+                        <li>Online fee payment</li>
+                        <li>Payment history access</li>
+                        <li>Receipt generation</li>
+                        <li>Balance inquiry</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>👪 Parents</h4>
+                    <ul>
+                        <li>Pay school fees online</li>
+                        <li>Track payment records</li>
+                        <li>Multiple payment options</li>
+                        <li>Instant confirmation</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>🏫 School</h4>
+                    <ul>
+                        <li>Automated payment tracking</li>
+                        <li>Real-time reporting</li>
+                        <li>Financial analytics</li>
+                        <li>Reduced manual work</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn btn-secondary" onclick="openModal('payment')">Make Payment</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admission Section -->
+    <section class="admission-section" id="admission">
+        <div class="container">
+            <h2 class="section-title">Admission</h2>
+            
+            <div class="admission-info">
+                <p>Our admission application is both <strong>online and offline</strong> and is eligible to pupils in their final grade of primary school (Primary 6) who are between <strong>10–13-years old</strong>.</p>
+                
+                <p>However, a child has to sit for the <strong>Common Entrance examination</strong> and also be selected by the Admission Selection Team based on some criteria before he|she is admitted into the School. The Common Entrance seeks to select the best candidates from every part of the country into the school.</p>
+                
+                <div class="highlight-box">
+                    <h4>📝 Examination Details</h4>
+                    <p><strong>There are usually so many applicants and the competition is fierce.</strong></p>
+                    <p>The exam is out of <strong>300 marks</strong>.</p>
+                </div>
+
+                <h4>Supplementary Examination</h4>
+                <p>We also organize <strong>Supplementary Examination</strong> for admission into JS1 which is strictly for only candidates who <strong>missed the Entrance examination</strong>, not a resit examination for candidates who failed.</p>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="openModal('admission')" style="margin-right: 10px;">Apply for Common Entrance</button>
+                    <button class="btn btn-secondary" onclick="openModal('supplementary')">Apply for Supplementary</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Support Section -->
+    <section class="content-section" id="support">
+        <div class="container">
+            <h2 class="section-title">Technical Support</h2>
+            <div class="content-text">
+                <p>Above customized System is the college initiative for digitalized mode of resolving Technical Issues from any of our integrated platforms. We believe that no system is ever perfect in operations except it is no longer in existence.</p>
+                
+                <p>Thus, the System as powered by the college, is designed for:</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-box">
+                    <h4>🛠️ Issue Resolution</h4>
+                    <ul>
+                        <li>Report technical problems</li>
+                        <li>Track issue status</li>
+                        <li>Get timely solutions</li>
+                        <li>24/7 support access</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>💬 Communication</h4>
+                    <ul>
+                        <li>Direct support chat</li>
+                        <li>Email ticketing system</li>
+                        <li>Phone support</li>
+                        <li>FAQ resources</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>📊 System Monitoring</h4>
+                    <ul>
+                        <li>Platform status updates</li>
+                        <li>Maintenance alerts</li>
+                        <li>Performance tracking</li>
+                        <li>User feedback system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="openModal('support')">Report an Issue</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interswitch Autopay Section -->
+    <section class="content-section" id="autopay" style="background: #f5f5f5;">
+        <div class="container">
+            <h2 class="section-title">Interswitch Autopay</h2>
+            <div class="content-text">
+                <p>Interswitch Autopay is an efficient platform for managing multiple credit payments across Organizations. It enables organizations to perform one-off or recurring direct credit multiple payments to vendors, contractors, suppliers, and staff across multiple banks / mobile wallets in a timely and cost effective manner.</p>
+                
+                <p><strong>It is built and integrated for:</strong></p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-box">
+                    <h4>💰 Payment Management</h4>
+                    <ul>
+                        <li>Multiple payment processing</li>
+                        <li>Vendor payments</li>
+                        <li>Staff salary disbursement</li>
+                        <li>Contractor payments</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>🔄 Automated Payments</h4>
+                    <ul>
+                        <li>One-off payments</li>
+                        <li>Recurring payments</li>
+                        <li>Scheduled transactions</li>
+                        <li>Bulk payment uploads</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h4>🏦 Multi-Bank Support</h4>
+                    <ul>
+                        <li>All Nigerian banks supported</li>
+                        <li>Mobile wallet integration</li>
+                        <li>Real-time processing</li>
+                        <li>Secure transactions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="openModal('autopay')">Access Autopay</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About MCSS</h4>
+                <p>Military Comprehensive Secondary School - Excellence in Education</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#portal">Portal Login</a></li>
+                    <li><a href="#billing">Billing System</a></li>
+                    <li><a href="#admission">Admission</a></li>
+                    <li><a href="#support">Technical Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>Email: info@mcssonline.com</li>
+                    <li>Phone: +234 XXX XXX XXXX</li>
+                    <li>Address: MCSS Campus</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy;2026 Sparkage Shots. Please kindly note that this is for entertainment/advertizing purposes only</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Portal Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>User Type:</label>
+                    <select id="userType" required>
+                        <option value="">Select User Type</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Administrator</option>
+                        <option value="parent">Parent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" style="color: #0066cc;">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        let slideTimer;
+
+        // Initialize slideshow
+        showSlides(slideIndex);
+        startAutoSlide();
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Slideshow Functions
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex = n);
+            startAutoSlide();
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            slides[slideIndex-1].classList.add("active");
+            dots[slideIndex-1].classList.add("active");
+        }
+
+        function startAutoSlide() {
+            slideTimer = setTimeout(function() {
+                slideIndex++;
+                showSlides(slideIndex);
+                startAutoSlide();
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        function openModal(type) {
+            const modal = document.getElementById('loginModal');
+            modal.classList.add('active');
+            
+            if (type) {
+                const userType = document.getElementById('userType');
+                userType.value = type;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.remove('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const userType = document.getElementById('userType').value;
+            const username = document.getElementById('username').value;
+            
+            alert(`Login attempt for ${userType}: ${username}\n\nThis is a demo. In production, this would authenticate against the database.`);
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                     
+                    const navMenu = document.getElementById('navMenu');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
